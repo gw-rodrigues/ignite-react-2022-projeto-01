@@ -6,6 +6,7 @@ import { Sidebar } from "./components/Sidebar";
  */
 import styles from "./App.module.css";
 import "./global.css";
+import { Post } from "./components/Post";
 
 /**
  *  .JSX - Javascript + XML
@@ -26,7 +27,10 @@ function App() {
 
       <div className={styles.wrapper}>
         <Sidebar />
-        <main></main>
+        <main>
+          <Post />
+          <Post />
+        </main>
       </div>
     </>
   );
