@@ -64,13 +64,12 @@ const posts = [
       {
         type: "paragraph",
         content:
-          "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
+          "É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
       },
       {
         type: "link",
         content: "👉 jane.design/doctorcare",
       },
-      { type: "tag", content: "#novoprojeto" },
       { type: "tag", content: "#nlw" },
       { type: "tag", content: "#rocketseat" },
     ],
