@@ -53,7 +53,7 @@ const posts = [
     publishedAt: new Date("2022-10-17 15:15:00"),
   },
   {
-    id: 1,
+    id: 2,
     author: {
       avatarUrl: "https://github.com/maykbrito.png",
       name: "Mayk Brito",
