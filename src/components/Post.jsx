@@ -7,8 +7,27 @@ import { Avatar } from "./Avatar";
 
 import styles from "./Post.module.css";
 
+/**
+ *  Programação Imperativa
+ *  #receita bolo
+ *  1. ligar forno a 180.
+ *  2. abrir a porta do forno.
+ *  3. colocar massa numa tigela.
+ *  4. colocar a forma com a massa dentro do forno.
+ *
+ *
+ *  Programação Declarative (vamos usar/é usado no React)
+ *  #receita bolo
+ *  1. o forno precisa está a 180.
+ *  2. quando forno estiver quente, eu posso colocar a massa para assar.
+ *  3. quando a massa estiver pronta, eu posso retira-la do forno.
+ *
+ */
+
 export function Post({ author, content, publishedAt }) {
-  const [comments, setComments] = useState([1]);
+  const [comments, setComments] = useState([
+    "Muito bom Devon, parabéns!! 👏👏",
+  ]);
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -24,7 +43,9 @@ export function Post({ author, content, publishedAt }) {
   function handleCreateNewComment() {
     event.preventDefault();
 
-    setComments([...comments, comments.length + 1]);
+    setComments([...comments, event.target.comment.value]);
+
+    event.target.comment.value = "";
   }
 
   return (
@@ -69,7 +90,7 @@ export function Post({ author, content, publishedAt }) {
 
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea placeholder="Deixe um comentário"></textarea>
+        <textarea name="comment" placeholder="Deixe um comentário"></textarea>
 
         <footer>
           <button type="submit">Publicar</button>
@@ -78,7 +99,7 @@ export function Post({ author, content, publishedAt }) {
 
       <div className={styles.commentList}>
         {comments.map((comment) => (
-          <Comment key={comment} />
+          <Comment content={comment} />
         ))}
       </div>
     </article>
