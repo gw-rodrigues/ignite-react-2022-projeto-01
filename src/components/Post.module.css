@@ -121,3 +121,7 @@ a + a {
 .commentForm > footer button[type="submit"]:hover {
   background: var(--green-300);
 }
+
+.commetList {
+  margin-top: 2rem;
+}
