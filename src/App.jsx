@@ -27,6 +27,31 @@ import { Post } from "./components/Post";
  * content: String
  */
 
+/**
+ *
+ *    Key no React
+ *
+ *  ## Por que única?
+ *
+ *  3 momentos em que um componentes é renderizado novamente no React.
+ *
+ *  1. Quando o estado altera.
+ *  2. Quando a propriedades altera.
+ *  3. Quando um componente pai renderiza novamente.
+ *
+ *  Exemplo:
+ *  1, 2, 3, 4
+ *  1, 2, 3, 4, 5 -> quando há alteração react verificar e adiciona apenas o componente que falta.
+ *
+ *
+ *  ## Por que nao posso usar o índice/index do array?
+ *
+ *  ```js
+ *  const posts = [1, 2, 3, 4, 5]
+ *  // 1, 2, 4, 5, 3 -> quando alteramos a ordem o React verifica que houve alteração e renderiza todo componente/e ou componente que mudo a ordem, sendo que ele já existe.
+ * ```
+ */
+
 const posts = [
   {
     id: 1,
