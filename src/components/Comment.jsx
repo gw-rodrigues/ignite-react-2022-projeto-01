@@ -1,11 +1,19 @@
-import { Trash, ThumbsUp } from "phosphor-react"
-import { Avatar } from "./Avatar"
-import styles from "./Comment.module.css"
+import { useState } from 'react';
+import { Trash, ThumbsUp } from 'phosphor-react';
+import { Avatar } from './Avatar';
+import styles from './Comment.module.css';
 
 export function Comment({ content, onDeleteComment }) {
+  const [likeCount, setLikeCount] = useState(0);
+
   function handleDeleteComment() {
-    onDeleteComment(content)
+    onDeleteComment(content);
   }
+
+  function handleLikeComment() {
+    setLikeCount((total) => prev + 1);
+  }
+
   return (
     <div className={styles.comment}>
       <Avatar hasBorder={false} src="https://github.com/gw-rodrigues.png" />
@@ -32,12 +40,12 @@ export function Comment({ content, onDeleteComment }) {
         </div>
 
         <footer>
-          <button>
+          <button onClick={handleLikeComment}>
             <ThumbsUp />
-            Aplaudir <span>20</span>
+            Aplaudir <span>{likeCount}</span>
           </button>
         </footer>
       </div>
     </div>
-  )
+  );
 }
