@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { format, formatDistanceToNow } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
+import { useState } from 'react';
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
-import { Comment } from "./Comment";
-import { Avatar } from "./Avatar";
+import { Comment } from './Comment';
+import { Avatar } from './Avatar';
 
-import styles from "./Post.module.css";
+import styles from './Post.module.css';
 
 /**
  *  Programação Imperativa
@@ -26,10 +26,10 @@ import styles from "./Post.module.css";
 
 export function Post({ author, content, publishedAt }) {
   const [comments, setComments] = useState([
-    "Muito bom Devon, parabéns!! 👏👏",
+    'Muito bom Devon, parabéns!! 👏👏',
   ]);
 
-  const [newCommentText, setNewCommentText] = useState("");
+  const [newCommentText, setNewCommentText] = useState('');
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -46,14 +46,26 @@ export function Post({ author, content, publishedAt }) {
     event.preventDefault();
 
     setComments([...comments, newCommentText]);
-
-    setNewCommentText("");
+    setNewCommentText('');
   }
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   }
 
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity('Esse campo é obrigatório!');
+  }
+
+  function deleteComment(commentToDelete) {
+    const commentsWithoutDeletedOne = comments.filter((comment) => {
+      return comment !== commentToDelete;
+    });
+    setComments(commentsWithoutDeletedOne);
+  }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
   return (
     <article className={styles.post}>
       <header>
@@ -74,10 +86,10 @@ export function Post({ author, content, publishedAt }) {
       </header>
       <div className={styles.content}>
         {content.map((line) => {
-          if (line.type === "paragraph") {
+          if (line.type === 'paragraph') {
             return <p key={line.content}>{line.content}</p>;
           }
-          if (line.type === "link") {
+          if (line.type === 'link') {
             return (
               <p key={line.content}>
                 <a href="#">{line.content}</a>
@@ -87,7 +99,7 @@ export function Post({ author, content, publishedAt }) {
         })}
         <p>
           {content.map((line) => {
-            if (line.type === "tag") {
+            if (line.type === 'tag') {
               return (
                 <a key={line.content} href="#">
                   {line.content}
@@ -105,16 +117,24 @@ export function Post({ author, content, publishedAt }) {
           placeholder="Deixe um comentário"
           onChange={handleNewCommentChange}
           value={newCommentText}
+          required
+          onInvalid={handleNewCommentInvalid}
         ></textarea>
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentEmpty}>
+            Publicar
+          </button>
         </footer>
       </form>
 
       <div className={styles.commentList}>
         {comments.map((comment) => (
-          <Comment key={comment} content={comment} />
+          <Comment
+            key={comment}
+            content={comment}
+            onDeleteComment={deleteComment}
+          />
         ))}
       </div>
     </article>
