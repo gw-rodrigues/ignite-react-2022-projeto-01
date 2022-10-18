@@ -97,7 +97,7 @@ a + a {
   max-height: none;
 }
 
-.commentForm > footer button[type="submit"] {
+.commentForm > footer button[type='submit'] {
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 8px;
@@ -110,8 +110,13 @@ a + a {
   transition: background 0.2s;
 }
 
-.commentForm > footer button[type="submit"]:hover {
+.commentForm > footer button[type='submit']:not(:disabled):hover {
   background: var(--green-300);
+}
+
+.commentForm > footer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .commetList {
